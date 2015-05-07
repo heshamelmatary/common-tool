@@ -63,6 +63,16 @@ ifeq ($(CONFIG_ARCH_IA32),y)
 	DEFINES += CONFIG_X86_32
 endif
 
+ifeq ($(CONFIG_ARCH_RISCV),y)
+  ccflags-y += $(call cc-option,-m32)
+  # Crucial for ABI compatability, otherwise linking will fail
+	asflags-y += -Wa,-m32
+	DEFINES += ARCH_RISCV
+	NK_CFLAGS += --disable-werror 
+	export ARCH = riscv
+	export PLAT = qemu-riscv
+endif
+
 ifeq ($(CONFIG_X86_64),y)
 # reset first
 	cflags-y =
@@ -140,6 +150,12 @@ endif
 ifeq ($(CONFIG_PLAT_PC99),y)
 	DEFINES += PLAT_PC99
 	export PLAT = pc99
+endif
+
+ifeq ($(CONFIG_PLAT_QEMU_RISCV),y)
+	DEFINES +=  QEMU_RISCV
+	DEFINES += PLAT_QEMU_RISCV
+	export PLAT = qemu_riscv
 endif
 
 ifeq ($(CONFIG_PLAT_REALVIEW),y)

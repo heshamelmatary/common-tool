@@ -14,6 +14,7 @@ menu "Toolchain Options"
         string "Cross compiler prefix"
     default "arm-none-eabi-" if ARCH_ARM
     default "i686-pc-linux-gnu-" if ARCH_I386
+    default "riscv-" if ARCH_RISCV
     default ""
         help
             Set the cross compiler prefix, like arm-linux-gnueabi-
