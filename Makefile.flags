@@ -64,7 +64,7 @@ ifeq ($(CONFIG_ARCH_IA32),y)
 endif
 
 ifeq ($(CONFIG_ARCH_RISCV),y)
-  ccflags-y += $(call cc-option,-m32)
+  #ccflags-y += $(call cc-option,-m32)
   # Crucial for ABI compatability, otherwise linking will fail
 	asflags-y += -Wa,-m32
 	DEFINES += ARCH_RISCV
