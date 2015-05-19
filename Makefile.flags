@@ -68,7 +68,7 @@ ifeq ($(CONFIG_ARCH_RISCV),y)
   # Crucial for ABI compatability, otherwise linking will fail
 	asflags-y += -Wa,-m32
 	DEFINES += ARCH_RISCV
-	NK_CFLAGS += --disable-werror 
+	#NK_CFLAGS += --disable-werror 
 	export ARCH = riscv
 	export PLAT = spike
 endif

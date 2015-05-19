@@ -45,6 +45,9 @@ case "$PLAT" in
     "pc99")
         FORMAT=elf32-i386
         ;;
+    "spike")
+        FORMAT=elf32-littleriscv
+        ;;
     *)
         echo "$0: Unknown platform \"$PLAT\""
         exit 1
@@ -87,8 +90,8 @@ echo "SECTIONS { ._archive_cpio : { ${SYMBOL} = . ; *(.*) ; ${SYMBOL}_end = . ; 
 # Generate an output object file. We switch to the same directory as ${ARCHIVE}
 # in order to avoid symbols containing ${TEMP_DIR} polluting the namespace.
 pushd "$(dirname ${ARCHIVE})" >/dev/null
-${TOOLPREFIX}ld -T ${LINK_SCRIPT} \
-        --oformat ${FORMAT} -r -b binary $(basename ${ARCHIVE}) \
+riscv32-unknown-elf-ld -T ${LINK_SCRIPT} \
+				--oformat ${FORMAT} -b binary $(basename ${ARCHIVE}) -nostdlib \
         -o ${OUTPUT_FILE}
 popd >/dev/null
 

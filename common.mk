@@ -236,7 +236,7 @@ else
 	@echo " [CC] $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(call make-depend,$<,$@,$(patsubst %.o,%.d,$@))
-	$(Q)$(CC) -x c $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(Q)$(CC) -x c -m32 $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 endif
 %.o: %.cxx $(HFILES) | install-headers
 	@echo " [CXX] $@"
@@ -272,7 +272,8 @@ endif
 %.elf: $(OBJFILES)
 	@echo " [LINK] $@"
 	$(Q)mkdir -p $(dir $@)
-	$(Q)$(CC) $(CRTOBJFILES) $^ $(FINOBJFILES) $(LDFLAGS) -o $@
+	$(Q)$(CC) $^ $(FINOBJFILES) $(LDFLAGS) -nostartfiles -o $@
+#	$(Q)$(CC) $(CRTOBJFILES) $^ $(FINOBJFILES) $(LDFLAGS) -nostartfiles -o $@
 
 %.img: %.bin $(COBBLER) $(SEL4_KERNEL)
 	@echo " [IMG] $@"
