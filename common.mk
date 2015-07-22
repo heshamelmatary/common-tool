@@ -272,8 +272,8 @@ endif
 %.elf: $(OBJFILES)
 	@echo " [LINK] $@"
 	$(Q)mkdir -p $(dir $@)
-	$(Q)$(CC) $^ $(FINOBJFILES) $(LDFLAGS) -nostartfiles -o $@
-#	$(Q)$(CC) $(CRTOBJFILES) $^ $(FINOBJFILES) $(LDFLAGS) -nostartfiles -o $@
+#	$(Q)$(CC) $^ $(LDFLAGS) -nostartfiles -o $@
+	$(Q)$(CC) $(CRTOBJFILES) $^ $(FINOBJFILES) $(LDFLAGS) -o $@
 
 %.img: %.bin $(COBBLER) $(SEL4_KERNEL)
 	@echo " [IMG] $@"

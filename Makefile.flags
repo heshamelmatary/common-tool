@@ -73,6 +73,10 @@ ifeq ($(CONFIG_ARCH_RISCV),y)
 	export PLAT = spike
 endif
 
+ifeq ($(CONFIG_ARCH_RISCV64),y)
+	DEFINES += RISCV64
+endif
+
 ifeq ($(CONFIG_X86_64),y)
 # reset first
 	cflags-y =

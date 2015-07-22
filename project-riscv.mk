@@ -38,8 +38,8 @@ elfloader: libcpio common FORCE
 %-image: export V
 %-image: % kernel_elf common elfloader FORCE
 	@echo "[GEN_IMAGE] $@-$(ARCH)-$(PLAT)"
-	$(Q)$(SEL4_COMMON)/elfloader/gen_boot_image.sh $(STAGE_BASE)/kernel.elf 
-		$(STAGE_BASE)/bin/$< $(IMAGE_ROOT)/$@-$(ARCH)-$(PLAT) 2>&1 \
+	$(Q)$(SEL4_COMMON)/elfloader/gen_boot_image.sh $(STAGE_BASE)/kernel.elf \
+	$(STAGE_BASE)/bin/$< $(IMAGE_ROOT)/$@-$(ARCH)-$(PLAT) 2>&1 \
 		| while read line; do echo " [GEN_IMAGE] $$line"; done; \
 		exit $${PIPESTATUS[0]}
 
